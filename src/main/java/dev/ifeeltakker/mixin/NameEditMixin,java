@@ -1,0 +1,28 @@
+package dev.ifeeltakker.mixin;
+
+import net.minecraft.text.CharacterVisitor;
+import net.minecraft.text.Style;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.Inject;
+import net.minecraft.text.TextVisitFactory;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import org.spongepowered.asm.mixin.injection.At;
+import dev.ifeeltakker.Init;
+
+@Mixin(TextVisitFactory.class)
+public class NameEditMixin {
+
+    @Inject(
+            method = "visitFormatted(Ljava/lang/String;ILnet/minecraft/text/Style;Lnet/minecraft/text/CharacterVisitor;)Z",
+            at = @At("HEAD"),
+            cancellable = true
+    )
+    private static void injectReplaceName(String input, int index, Style style, CharacterVisitor visitor, CallbackInfoReturnable<Boolean> cir) {
+        // Используем новый безопасный метод replaceName
+        String replaced = Init.replaceName(input);
+
+        if (!replaced.equals(input)) {
+            cir.setReturnValue(TextVisitFactory.visitFormatted(replaced, index, style, visitor));
+        }
+    }
+}
