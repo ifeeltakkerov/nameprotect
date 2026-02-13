@@ -1,0 +1,31 @@
+{
+	"schemaVersion": 1,
+	"id": "nameprotect",
+	"version": "${version}",
+	"name": "NameProtect",
+	"description": "Hide your real name",
+	"authors": [
+		"ifeeltakker"
+	],
+	"contact": {
+		"homepage": "https://fabricmc.net/",
+		"sources": "https://github.com/FabricMC/fabric-example-mod"
+	},
+	"license": "CC0-1.0",
+	"icon": "assets/nameprotect/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"dev.ifeeltakker.NP"
+		]
+	},
+	"mixins": [
+		"nameprotect.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.18.4",
+		"minecraft": "~1.20.1",
+		"java": ">=17",
+		"fabric-api": "*"
+	}
+}
